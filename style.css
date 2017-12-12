@@ -1,0 +1,9 @@
+#gameScreen{
+  position: relative;
+  overflow: hidden;
+}
+
+.gameObject{
+  position: absolute;
+  z-index: 1;
+}
