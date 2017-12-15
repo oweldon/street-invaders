@@ -4,6 +4,7 @@ body {
 #gameScreen{
   position: relative;
   overflow: hidden;
+  display: inline-block;
 }
 .gameObject{
   position: absolute;

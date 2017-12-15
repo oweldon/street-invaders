@@ -9,6 +9,8 @@ var rightArrowDown = false;
 var upArrowDown = false;
 var downArrowDown = false;
 var bg1, bg2;
+var fireKen;
+var score = 1;
 
 
   function init(){
@@ -30,16 +32,6 @@ var bg1, bg2;
     bg1.style.top  = "0px";
     gameScreen.appendChild(bg1);
 
-  //
-  // bg2 = document.createElement('IMG');
-  // bg2.className = "gameObject";
-  // bg2.src = "images/bg1.jpg";
-  // bg2.style.width = "800px";
-  // bg2.style.height = "1422px;"
-  // bg2.style.left = "0px";
-  // bg2.style.top  = "-1422px";
-  // gameScreen.appendChild(bg2);
-
   output = document.getElementById('output');
 
   ryu = document.createElement('IMG');
@@ -52,26 +44,23 @@ var bg1, bg2;
   gameScreen.appendChild(ryu);
 
   function spawnEnemy(){
-  console.log('Spawn');
-
-  var newEnemy = document.createElement('IMG');
-  newEnemy.src = "images/ken.gif";
-  newEnemy.className = "gameObject enemy";
-  newEnemy.style.width = '100px';
-  newEnemy.style.height = '100px';
-  newEnemy.style.right = 0;
-  newEnemy.style.top = Math.floor(Math.random()*400) + 'px';
-  enemies.push(newEnemy);
-  gameScreen.appendChild(newEnemy);
-  $(document).ready(function() {
-  var width = "+=" + $(document).width();
-  $(newEnemy).animate({
-  right: width
-}, 20000, function() {
-  $("newEnemy").css("display", "none");
-});
-});
-}
+    var newEnemy = document.createElement('IMG');
+    newEnemy.src = "images/ken.gif";
+    newEnemy.className = "gameObject enemy";
+    newEnemy.style.width = '100px';
+    newEnemy.style.height = '100px';
+    newEnemy.style.right = 0;
+    newEnemy.style.top = Math.floor(Math.random()*400) + 'px';
+    enemies.push(newEnemy);
+    gameScreen.appendChild(newEnemy);
+    $(document).ready(function() {
+      var width = "+=" + $(document).width();
+        $(newEnemy).animate({
+          right: width
+          }, 20000, function() {
+        });
+    });
+  }
 var hitTest = setInterval(function(){
         var enemylist = $(".enemy");
 
@@ -95,9 +84,10 @@ var hitTest = setInterval(function(){
         var hadoukenR = hadouken.width();
 
         if(hadoukenT >= enemyT-hadoukenB && hadoukenT <= enemyB && hadoukenL >= enemyL-hadoukenR && hadoukenL <= enemyR){
-            enemy.hide();
-                enemy.remove();
-                hadouken.hide();
+          enemy.hide();
+          enemy.remove();
+          hadouken.hide();
+          document.getElementById('playerScore').textContent = score++;
         }
       }
     }
@@ -148,7 +138,7 @@ function fire(){
     "background-size": "100%",
     "width": "75px",
     "height": "75px",
-    "left": (ryu.x) + 135 + 'px',
+    "left": (ryu.x) - 175 + 'px',
     "top": (ryu.y) - 5 +'px'
   })
 
@@ -162,7 +152,6 @@ function fire(){
 });
 
   gameScreen.appendChild(hadouken.get(0));
-  console.log('hadouken');
 }
 
 
