@@ -11,10 +11,10 @@ var downArrowDown = false;
 var bg1, bg2;
 var fireKen;
 var score = 1;
-
+var titleScreen = document.getElementById('titleScreen');
 
   function init(){
-
+    $("#titleScreen").hide();
     gameScreen = document.getElementById('gameScreen');
     gameScreen.style.width = "800px";
     gameScreen.style.height = "600px";
@@ -87,7 +87,7 @@ var hitTest = setInterval(function(){
           enemy.hide();
           enemy.remove();
           hadouken.hide();
-          document.getElementById('playerScore').textContent = score++;
+          document.getElementById('playerScore').textContent = "SCORE: " + score++;
         }
       }
     }
@@ -139,7 +139,7 @@ function fire(){
     "width": "75px",
     "height": "75px",
     "left": (ryu.x) - 175 + 'px',
-    "top": (ryu.y) - 5 +'px'
+    "top": (ryu.y) - 90 +'px'
   })
 
   hadouken.show();

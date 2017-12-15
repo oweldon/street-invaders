@@ -1,12 +1,36 @@
 body {
   text-align: center;
+  font-family: 'Rock Salt', cursive;
+  background-image: url(images/menuback.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+h1 {
+  font-size: 75px;
+}
+p:hover {
+  text-decoration: line-through;
+  text-decoration-color: white;
+}
+p {
+  font-size: 25px;
 }
 #gameScreen{
   position: relative;
   overflow: hidden;
   display: inline-block;
+  top: 80px;
+}
+#titleScreen {
+  display: inline-block;
+  height: 600px;
+  width: 800px;
+  background-color: rgba(255, 0, 0, 0.5);
 }
 .gameObject{
   position: absolute;
   z-index: 1;
+}
+#playerScore {
+  font-size: 36px;
 }

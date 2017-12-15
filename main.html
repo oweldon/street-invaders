@@ -4,11 +4,15 @@
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
     <title>Street Invaders</title>
   </head>
 
-    <body onload="init()">
-
+    <body>
+      <div id="titleScreen">
+        <h1>STREET INVADERS</h1>
+        <p onclick="init()">PLAY</p> <p id="instructions">INSTRUCTIONS</p>
+      </div>
   		<div id="gameScreen"></div>
       <div id="playerScore"></div>
 
