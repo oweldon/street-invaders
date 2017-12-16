@@ -52,7 +52,7 @@ var titleScreen = document.getElementById('titleScreen');
         }
     }, 1000);
 }
-    startTimer(3, document.getElementById("countdown"));
+    startTimer(40, document.getElementById("countdown"));
 
     hadouken = document.createElement('DIV');
     hadouken.className = 'gameObject hadouken';
