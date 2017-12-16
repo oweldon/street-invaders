@@ -6,8 +6,7 @@ var enemies = [];
 var gameTimer;
 var upArrowDown = false;
 var downArrowDown = false;
-var bg1, bg2;
-var fireKen;
+var bg1;
 var score = 1;
 var titleScreen = document.getElementById('titleScreen');
 
@@ -23,7 +22,9 @@ var titleScreen = document.getElementById('titleScreen');
       a.title = "Play Again?";
       a.href = "javascript:history.go(0)";
       a.style.color = "white";
-      a.style.bottom = "0";
+      a.style.position = "absolute";
+      a.style.left = "450px";
+      a.style.bottom = "100px";
       titleScreen.appendChild(a);
   }
 
@@ -52,51 +53,49 @@ var titleScreen = document.getElementById('titleScreen');
         }
     }, 1000);
 }
-    startTimer(40, document.getElementById("countdown"));
+    startTimer(30, document.getElementById("countdown"));
 
     hadouken = document.createElement('DIV');
-    hadouken.className = 'gameObject hadouken';
-    gameScreen.appendChild(hadouken);
+      hadouken.className = 'gameObject hadouken';
+      gameScreen.appendChild(hadouken);
 
     bg1 = document.createElement('IMG');
-    bg1.className = "gameObject";
-    bg1.src = "images/bg1.jpg";
-    bg1.style.width = "800px";
-    bg1.style.height = "600px;"
-    bg1.style.left = "0px";
-    bg1.style.top  = "0px";
-    gameScreen.appendChild(bg1);
+      bg1.className = "gameObject";
+      bg1.src = "images/bg1.jpg";
+      bg1.style.width = "800px";
+      bg1.style.height = "600px;"
+      bg1.style.left = "0px";
+      bg1.style.top  = "0px";
+      gameScreen.appendChild(bg1);
 
-  output = document.getElementById('output');
-
-  ryu = document.createElement('IMG');
-  ryu.src = 'images/ryuwalk.gif';
-  ryu.className = 'gameObject';
-  ryu.style.width = '100px';
-  ryu.style.height = '100px';
-  ryu.style.top = '350px';
-  ryu.style.left = '0';
-  gameScreen.appendChild(ryu);
+    ryu = document.createElement('IMG');
+      ryu.src = 'images/ryuwalk.gif';
+      ryu.className = 'gameObject';
+      ryu.style.width = '100px';
+      ryu.style.height = '100px';
+      ryu.style.top = '350px';
+      ryu.style.left = '0';
+      gameScreen.appendChild(ryu);
 
   function spawnEnemy(){
     var newEnemy = document.createElement('IMG');
-    newEnemy.src = "images/ken.gif";
-    newEnemy.className = "gameObject enemy";
-    newEnemy.style.width = '100px';
-    newEnemy.style.height = '100px';
-    newEnemy.style.right = 0;
-    newEnemy.style.top = Math.floor(Math.random()*400) + 'px';
-    enemies.push(newEnemy);
-    gameScreen.appendChild(newEnemy);
-    $(document).ready(function() {
-      var width = "+=" + $(document).width();
-        $(newEnemy).animate({
-          right: width
-        }, 9000, function() {
-        });
-    });
-  }
-var hitTest = setInterval(function(){
+      newEnemy.src = "images/ken.gif";
+      newEnemy.className = "gameObject enemy";
+      newEnemy.style.width = '100px';
+      newEnemy.style.height = '100px';
+      newEnemy.style.right = 0;
+      newEnemy.style.top = Math.floor(Math.random()*400) + 'px';
+      enemies.push(newEnemy);
+      gameScreen.appendChild(newEnemy);
+      $(document).ready(function() {
+        var width = "+=" + $(document).width();
+          $(newEnemy).animate({
+            right: width
+          }, 9000, function() {
+          });
+      });
+    }
+    var hitTest = setInterval(function(){
         var enemylist = $(".enemy");
 
         for(i = 0; i < enemylist.length; i++){
@@ -173,47 +172,47 @@ function fire(){
   $("hadouken").hide();
 });
 
-  gameScreen.appendChild(hadouken.get(0));
-}
-
-document.addEventListener('keypress', function(event){
-  if(event.keyCode==32){
-    ryu.src = "images/ryu.png";
-    fire();
+    gameScreen.appendChild(hadouken.get(0));
   }
-});
 
-document.addEventListener('keyup', function(event){
-  if(event.keyCode==32){
-    ryu.src = "images/ryuwalk.gif";
-  }
-});
-
-document.addEventListener('keydown', function(event){
-  if(event.keyCode==38) upArrowDown = true;
-  if(event.keyCode==40) downArrowDown = true;
-});
-
-document.addEventListener('keyup', function(event){
-  if(event.keyCode==38) upArrowDown = false;
-  if(event.keyCode==40) downArrowDown = false;
-});
-
-var modal = document.getElementById('myModal');
-var btn = document.getElementById("instructions");
-var span = document.getElementsByClassName("close")[0];
-
-
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+  document.addEventListener('keypress', function(event){
+    if(event.keyCode==32){
+      ryu.src = "images/ryu.png";
+      fire();
     }
-}
+  });
+
+  document.addEventListener('keyup', function(event){
+    if(event.keyCode==32){
+      ryu.src = "images/ryuwalk.gif";
+    }
+  });
+
+  document.addEventListener('keydown', function(event){
+    if(event.keyCode==38) upArrowDown = true;
+    if(event.keyCode==40) downArrowDown = true;
+  });
+
+  document.addEventListener('keyup', function(event){
+    if(event.keyCode==38) upArrowDown = false;
+    if(event.keyCode==40) downArrowDown = false;
+  });
+
+  var modal = document.getElementById('myModal');
+  var btn = document.getElementById("instructions");
+  var span = document.getElementsByClassName("close")[0];
+
+
+  btn.onclick = function() {
+      modal.style.display = "block";
+  }
+
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
