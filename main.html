@@ -10,11 +10,21 @@
 
     <body>
       <div id="titleScreen">
-        <h1>STREET INVADERS</h1>
+        <h1 id="title">STREET INVADERS</h1>
         <p onclick="init()">PLAY</p> <p id="instructions">INSTRUCTIONS</p>
       </div>
+      <span id="countdown"></span>
   		<div id="gameScreen"></div>
       <div id="playerScore"></div>
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <span>Oh no!! Ken, your greatest rival, has been cloned a ludicrous amount of times! He must be stopped!
+          Use the up and down arrow keys to keep Ken from getting past you. The space bar fires your radical
+        hadouken powers! Only YOU can stop him....RY u! </span>
+        </div>
+      </div>
+
 
 
     <script type="text/javascript" src="script.js"></script>

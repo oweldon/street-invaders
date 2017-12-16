@@ -4,8 +4,6 @@ var hadouken;
 var ryu;
 var enemies = [];
 var gameTimer;
-var leftArrowDown = false;
-var rightArrowDown = false;
 var upArrowDown = false;
 var downArrowDown = false;
 var bg1, bg2;
@@ -13,11 +11,48 @@ var fireKen;
 var score = 1;
 var titleScreen = document.getElementById('titleScreen');
 
+  function endGame(){
+    $("#gameScreen").remove();
+    $("#titleScreen").show();
+    $("#countdown").remove();
+    $("#playerScore").remove();
+    document.getElementById("titleScreen").textContent = "Good Job Fighter, " + (score-1) + " Down!";
+    var a = document.createElement("a");
+      var linkText = document.createTextNode("Play Again?");
+      a.appendChild(linkText);
+      a.title = "Play Again?";
+      a.href = "javascript:history.go(0)";
+      a.style.color = "white";
+      a.style.bottom = "0";
+      titleScreen.appendChild(a);
+  }
+
   function init(){
     $("#titleScreen").hide();
     gameScreen = document.getElementById('gameScreen');
+    $("gameScreen").show();
     gameScreen.style.width = "800px";
     gameScreen.style.height = "600px";
+
+    function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < -1) {
+            display.textContent = "00:00";
+        } else if (timer === -1) {
+          endGame();
+        }
+    }, 1000);
+}
+    startTimer(3, document.getElementById("countdown"));
 
     hadouken = document.createElement('DIV');
     hadouken.className = 'gameObject hadouken';
@@ -57,7 +92,7 @@ var titleScreen = document.getElementById('titleScreen');
       var width = "+=" + $(document).width();
         $(newEnemy).animate({
           right: width
-          }, 20000, function() {
+        }, 9000, function() {
         });
     });
   }
@@ -93,38 +128,25 @@ var hitTest = setInterval(function(){
     }
   }, 100);
 
-setInterval(spawnEnemy, 2500);
+setInterval(spawnEnemy, 1000);
+
 
 gameTimer =  setInterval(gameloop, 50);
 } //end init
 
 
-
   function gameloop(){
-
-  if(leftArrowDown){
-    var newX = parseInt(ryu.style.left);
-    if(newX > 0) ryu.style.left = newX - 10 + 'px';
-    else ryu.style.left = '0px';
-  }
-
-  if(rightArrowDown){
-    var newX = parseInt(ryu.style.left);
-    var maxX = 800 - parseInt(ryu.style.width);
-    if(newX <  maxX) ryu.style.left = newX + 10 + 'px';
-    else ryu.style.left = maxX + 'px';
-  }
 
   if(upArrowDown){
     var newY = parseInt(ryu.style.top);
-    if(newY > 0) ryu.style.top = newY - 10 + 'px';
+    if(newY > 0) ryu.style.top = newY - 5 + 'px';
     else ryu.style.top = '0px';
   }
 
   if(downArrowDown){
     var newY = parseInt(ryu.style.top);
     var maxY = 800 - parseInt(ryu.style.top);
-    if(newY <  maxY) ryu.style.top = newY + 10 + 'px';
+    if(newY <  maxY) ryu.style.top = newY + 5 + 'px';
     else ryu.style.top = maxY + 'px';
   }
 }
@@ -138,7 +160,7 @@ function fire(){
     "background-size": "100%",
     "width": "75px",
     "height": "75px",
-    "left": (ryu.x) - 175 + 'px',
+    "left": (ryu.x) - 180 + 'px',
     "top": (ryu.y) - 90 +'px'
   })
 
@@ -154,7 +176,6 @@ function fire(){
   gameScreen.appendChild(hadouken.get(0));
 }
 
-
 document.addEventListener('keypress', function(event){
   if(event.keyCode==32){
     ryu.src = "images/ryu.png";
@@ -169,15 +190,30 @@ document.addEventListener('keyup', function(event){
 });
 
 document.addEventListener('keydown', function(event){
-  if(event.keyCode==37) leftArrowDown = true;
   if(event.keyCode==38) upArrowDown = true;
-  if(event.keyCode==39) rightArrowDown = true;
   if(event.keyCode==40) downArrowDown = true;
 });
 
 document.addEventListener('keyup', function(event){
-  if(event.keyCode==37) leftArrowDown = false;
   if(event.keyCode==38) upArrowDown = false;
-  if(event.keyCode==39) rightArrowDown = false;
   if(event.keyCode==40) downArrowDown = false;
 });
+
+var modal = document.getElementById('myModal');
+var btn = document.getElementById("instructions");
+var span = document.getElementsByClassName("close")[0];
+
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
